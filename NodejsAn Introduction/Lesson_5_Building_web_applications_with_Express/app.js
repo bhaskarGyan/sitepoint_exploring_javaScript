@@ -1,13 +1,25 @@
 'use strict';
 var http = require( 'http' );
+var path = require('path');
 var mapping = require( './mapping' );
-var connect = require( 'connect' );
+var express = require( 'express' );
 var logger = require( './logger' );
-var app = connect();
+var app = express();
+
 
 app.use( logger( 'redirector' ) );
-app.use( function( req, res ) {
-    var url = mapping.get( req.url, function( err, url ) {
+
+app.set('views',path.join(__dirname,'views'));
+app.set('view engine','ejs');
+
+app.get('/',function(req,res){
+    res.render('index',{
+            mapping:'Bhaskar gyan vardhan'
+        });
+});
+
+app.get('/:id', function( req, res ) {
+    var url = mapping.get( req.params.id, function( err, url ) {
         if ( err ) {
             res.writeHead( 404 );
             return res.end();
@@ -18,6 +30,6 @@ app.use( function( req, res ) {
         } );
         res.end();
     } );
-} );
+});
 
 http.createServer( app ).listen( 3000 );
