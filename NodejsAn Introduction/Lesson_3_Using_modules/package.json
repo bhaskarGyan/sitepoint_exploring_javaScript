@@ -1,0 +1,10 @@
+{
+  "name": "nodejs_introduction",
+  "version": "0.0.1",
+  "main": "app.js",
+  "author": "Bhaskar gyan vardhan",
+  "license": "MIT",
+  "dependencies": {
+    "connect": "^3.4.1"
+  }
+}
